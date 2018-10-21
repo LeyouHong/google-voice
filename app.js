@@ -15,7 +15,7 @@ server.use(morgan('dev'))
 server.set('port', process.env.PORT || 4000);
 server.use(bodyParser.json({type: 'application/json'}));
 
-assistant.intent('helloWorld', conv => {
+assistant.intent('SendNotificationIntent', conv => {
 	let name = conv.parameters.name;
 	conv.ask('Hello, welcome ' + name);
 });
