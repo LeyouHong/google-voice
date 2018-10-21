@@ -15,7 +15,7 @@ server.use(morgan('dev'))
 server.set('port', process.env.PORT || 4000);
 server.use(bodyParser.json({type: 'application/json'}));
 
-assistant.intent('welcome', conv => {
+assistant.intent('Default Welcome Intent', conv => {
     console.log("enter welcome")
     return conv.ask(new Permission({
         context: 'Welcome to Leo welcome. '
