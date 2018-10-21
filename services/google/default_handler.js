@@ -1,10 +1,12 @@
+const defaultHandler = {}
 
-const { Permission } = require("actions-on-google");
+defaultHandler.welcome = (agent) => {
+    agent.add(`Welcome to Express.JS webhook!`);
+}
 
-exports.defaultHandler =  (conv) => {
-      return conv.ask(new Permission({
-          context: 'Welcome to Leo Voice center . '
-          , permissions: ['NAME', 'DEVICE_PRECISE_LOCATION'],
-      }));
-  };
+defaultHandler.fallback = (agent) => {
+    agent.add(`I didn't understand`);
+    agent.add(`I'm sorry, can you try again?`);
+}
 
+module.exports = defaultHandler;
