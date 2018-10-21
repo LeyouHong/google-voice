@@ -17,26 +17,17 @@ server.use(bodyParser.json({type: 'application/json'}));
 
 assistant.intent('Default Welcome Intent', conv => {
     console.log("enter welcome")
-    return conv.ask(new Permission({
-        context: 'Welcome to Leo welcome. '
-        , permissions: ['NAME', 'DEVICE_PRECISE_LOCATION'],
-    }));
+	conv.ask('Hello, welcome Leo welcome');
 });
 
 assistant.intent('Default Fallback Intent', conv => {
     console.log("enter fallback")
-    return conv.ask(new Permission({
-        context: 'Welcome to Leo fallback. '
-        , permissions: ['NAME', 'DEVICE_PRECISE_LOCATION'],
-    }));
+	conv.ask('Hello, welcome Leo fallback');
 });
 
 assistant.intent('SendNotificationIntent', conv => {
     console.log("enter notification")
-    return conv.ask(new Permission({
-        context: 'Welcome to Leo notification. '
-        , permissions: ['NAME', 'DEVICE_PRECISE_LOCATION'],
-    }));
+    conv.ask('Hello, welcome Leo SendNotificationIntent');
 });
 
 server.post('/', assistant);
