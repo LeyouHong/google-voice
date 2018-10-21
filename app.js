@@ -23,7 +23,7 @@ assistant.intent('Default Welcome Intent', conv => {
     }));
 });
 
-assistant.intent('fallback', conv => {
+assistant.intent('Default Fallback Intent', conv => {
     console.log("enter fallback")
     return conv.ask(new Permission({
         context: 'Welcome to Leo fallback. '
@@ -31,7 +31,7 @@ assistant.intent('fallback', conv => {
     }));
 });
 
-assistant.intent('notification', conv => {
+assistant.intent('SendNotificationIntent', conv => {
     console.log("enter notification")
     return conv.ask(new Permission({
         context: 'Welcome to Leo notification. '
