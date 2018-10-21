@@ -1,42 +1,27 @@
 'use strict';
 
-const {WebhookClient} = require('dialogflow-fulfillment')
 const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const {dialogflow} = require('actions-on-google');
-const limits = require('./dialogflow/limit');
 
 let defaultHandler = require('./services/google/default_handler')
 
-const app = express()
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
 
-const dialogflowApp = dialogflow({debug: config.app.debug});
-limits.addIntentsTo(dialogflowApp);
+const server = express();
+const assistant = dialogflow();
+server.use(morgan('dev'))
 
-// use morgan
-app.use(morgan('dev'))
+server.set('port', process.env.PORT || 4000);
+server.use(bodyParser.json({type: 'application/json'}));
 
-function WebhookProcessing(req, res) {
-    const agent = new WebhookClient({request: req, response: res});
-    console.info(`agent set`)
-
-    let intentMap = new Map()
-    intentMap.set('Default Welcome Intent', defaultHandler.welcome);
-    intentMap.set('Default Fallback Intent', defaultHandler.fallback);
-// intentMap.set('<INTENT_NAME_HERE>', yourFunctionHandler);
-    agent.handleRequest(intentMap)
-}
-
-
-// Webhook
-app.post('/', function (req, res) {
-    console.info(`\n\n>>>>>>> S E R V E R   H I T <<<<<<<`);
-    WebhookProcessing(req, res)
+assistant.intent('helloWorld', conv => {
+	let name = conv.parameters.name;
+	conv.ask('Hello, welcome ' + name);
 });
 
-app.listen(4000, function () {
-    console.info(`Webhook listening on port 8080!`)
+server.post('/google', assistant);
+
+server.listen(server.get('port'), function () {
+	console.log('Express server started on port', server.get('port'));
 });
