@@ -15,10 +15,10 @@ server.use(morgan('dev'))
 server.set('port', process.env.PORT || 4000);
 server.use(bodyParser.json({type: 'application/json'}));
 
-assistant.intent('SendNotificationIntent', conv => {
-    console.log("enter SendNotificationIntent")
+assistant.intent('notification', conv => {
+    console.log("enter notification")
     return conv.ask(new Permission({
-        context: 'Welcome to Seven Voice store . '
+        context: 'Welcome to Leo notification. '
         , permissions: ['NAME', 'DEVICE_PRECISE_LOCATION'],
     }));
 });
