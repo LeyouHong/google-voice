@@ -16,7 +16,8 @@ server.set('port', process.env.PORT || 4000);
 server.use(bodyParser.json({type: 'application/json'}));
 
 assistant.intent('SendNotificationIntent', conv => {
-	let name = conv.parameters.name;
+    console.log("enter SendNotificationIntent")
+    let name = conv.parameters.name;
 	conv.ask('Hello, welcome ' + name);
 });
 
