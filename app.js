@@ -15,6 +15,22 @@ server.use(morgan('dev'))
 server.set('port', process.env.PORT || 4000);
 server.use(bodyParser.json({type: 'application/json'}));
 
+assistant.intent('welcome', conv => {
+    console.log("enter welcome")
+    return conv.ask(new Permission({
+        context: 'Welcome to Leo welcome. '
+        , permissions: ['NAME', 'DEVICE_PRECISE_LOCATION'],
+    }));
+});
+
+assistant.intent('fallback', conv => {
+    console.log("enter notification")
+    return conv.ask(new Permission({
+        context: 'Welcome to Leo fallback. '
+        , permissions: ['NAME', 'DEVICE_PRECISE_LOCATION'],
+    }));
+});
+
 assistant.intent('notification', conv => {
     console.log("enter notification")
     return conv.ask(new Permission({
