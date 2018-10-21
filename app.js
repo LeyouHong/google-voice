@@ -4,12 +4,17 @@ const {WebhookClient} = require('dialogflow-fulfillment')
 const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const {dialogflow} = require('actions-on-google');
+const limits = require('./dialogflow/limit');
 
 let defaultHandler = require('./services/google/default_handler')
 
 const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
+
+const dialogflowApp = dialogflow({debug: config.app.debug});
+limits.addIntentsTo(dialogflowApp);
 
 // use morgan
 app.use(morgan('dev'))
