@@ -26,8 +26,9 @@ assistant.intent('Default Fallback Intent', conv => {
 });
 
 assistant.intent('SendNotificationIntent', conv => {
+    let number = conv.parameters.number;
     console.log("enter notification")
-    conv.ask('Hello, welcome Leo SendNotificationIntent');
+    conv.ask(`Hello, Leo want to send notification ${number}`);
 });
 
 server.post('/', assistant);
