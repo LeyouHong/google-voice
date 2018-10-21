@@ -24,7 +24,7 @@ assistant.intent('welcome', conv => {
 });
 
 assistant.intent('fallback', conv => {
-    console.log("enter notification")
+    console.log("enter fallback")
     return conv.ask(new Permission({
         context: 'Welcome to Leo fallback. '
         , permissions: ['NAME', 'DEVICE_PRECISE_LOCATION'],
@@ -39,7 +39,7 @@ assistant.intent('notification', conv => {
     }));
 });
 
-server.post('/google', assistant);
+server.post('/', assistant);
 
 server.listen(server.get('port'), function () {
 	console.log('Express server started on port', server.get('port'));
