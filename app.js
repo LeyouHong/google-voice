@@ -4,6 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const {dialogflow, Permission} = require('actions-on-google');
+const sendText = require('./services/util/sendText')
 
 let defaultHandler = require('./services/google/default_handler')
 
@@ -25,10 +26,21 @@ assistant.intent('Default Fallback Intent', conv => {
 	conv.ask('Hello, welcome Leo fallback');
 });
 
-assistant.intent('SendNotificationIntent', conv => {
+assistant.intent('SendTextIntent', conv => {
     let number = conv.parameters.number;
-    console.log("enter notification")
-    conv.ask(`Hello, Leo want to send notification ${number}`);
+    console.log("enter text")
+
+    // Create publish parameters
+    var params = {
+        Message: `The number is ${number}`, /* required */
+        PhoneNumber: '+19175611522',
+    };
+
+    sendText.text(params).then(()=>{
+        conv.ask(`Hello Leo you should receive the number`);
+    }).catch((e)=>{
+        conv.ask(`Hello Leo send text failed`);
+    })
 });
 
 server.post('/', assistant);
