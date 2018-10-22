@@ -36,11 +36,8 @@ assistant.intent('SendTextIntent', conv => {
         PhoneNumber: '+19175611522',
     };
 
-    sendText.text(params).then(()=>{
-        conv.ask(`Hello Leo you should receive the number`);
-    }).catch((e)=>{
-        conv.ask(`Hello Leo send text failed`);
-    })
+    sendText.text(params)
+    conv.ask(`Hello Leo you should receive the number`);
 });
 
 server.post('/', assistant);
