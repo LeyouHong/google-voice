@@ -18,7 +18,7 @@ server.use(bodyParser.json({type: 'application/json'}));
 
 assistant.intent('Default Welcome Intent', conv => {
     console.log("enter welcome")
-	conv.ask('Hello, welcome Leo welcome');
+	conv.ask('Hello, welcome to Leo voice text');
 });
 
 assistant.intent('Default Fallback Intent', conv => {
@@ -39,7 +39,7 @@ assistant.intent('SendTextIntent', conv => {
     };
 
     sendText.text(params)
-    conv.ask(`Hello Leo you should receive the number`);
+    conv.ask(`Hello Leo you should receive the text.`);
 });
 
 server.post('/', assistant);
