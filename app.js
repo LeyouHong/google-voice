@@ -29,7 +29,7 @@ assistant.intent('Default Fallback Intent', conv => {
 assistant.intent('SendTextIntent', conv => {
     let number = conv.parameters.number;
     console.log("enter text")
-
+    console.log(JSON.stringify(conv.parameters))
     // Create publish parameters
     var params = {
         Message: `The number is ${number}`, /* required */
