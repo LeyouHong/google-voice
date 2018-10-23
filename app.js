@@ -30,7 +30,8 @@ assistant.intent('SendTextIntent', conv => {
     let number = conv.parameters.number;
     console.log("enter text")
     //console.log(JSON.stringify(conv))
-    let msg = conv.request.query
+    let msg = conv.query
+    console.log(msg)
     // Create publish parameters
     var params = {
         Message: msg,//`The number is ${number}`, /* required */
